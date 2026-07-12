@@ -3,8 +3,8 @@ const router = require("express").Router();
 let users = [
     {
         id: 1,
-        name: "Vaishnavi",
-        email: "vaish@example.com"
+        name: "Vaishnavi Dhomne",
+        email: "vaishnavi@example.com"
     }
 ];
 
