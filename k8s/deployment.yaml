@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: deployment-app
+  namespace: deployment-demo
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: deployment-app
+
+  template:
+    metadata:
+      labels:
+        app: deployment-app
+
+    spec:
+      containers:
+        - name: deployment-app
+          image: vaishnavi099/deployment-2:30721808542e1dac81eb4a36d6c15aa05e92b9e4
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 3000
+
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secret
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
