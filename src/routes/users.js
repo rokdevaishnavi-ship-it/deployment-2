@@ -16,7 +16,8 @@ router.post("/", (req, res) => {
 
     const user = {
         id: users.length + 1,
-        ...req.body
+        ...req.body,
+        date: Date.now()
     };
 
     users.push(user);
